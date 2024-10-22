@@ -1,0 +1,70 @@
+  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Load Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <!-- Custom CSS to hide download button -->
+    <style>
+      .plyr__control--download {
+        display: none !important;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <script>
+      // disable right click
+      document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+      });
+    
+    </script>
+    <div>
+      <!-- Plyr video player -->
+      <div class="plyr__video-embed" id="player">
+        <iframe
+          src="https://www.youtube.com/embed/_w42OGhmAlc?rel=0&amp;showinfo=0&amp;controls=0&amp;enablejsapi=1&amp;vq=hd720"
+          allowfullscreen
+          allowtransparency
+          allow="autoplay"
+        ></iframe>
+      </div>
+    </div>
+    <!-- Load Plyr JS -->
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <script>
+      const player = new Plyr('#player', {
+        controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'],
+        youtube: {
+          noCookie: true,
+          rel: 0,
+          showinfo: 0,
+          modestbranding: 1,
+          iv_load_policy: 3
+        },
+        defaultQuality: '720p' // set default quality to 720p
+      });
+
+      const src = video.src.replace('vq=auto', 'vq=hd720'); // replace auto with hd720
+      video.src = src;
+      
+      // Disable right click on video
+      const video = document.querySelector('#player iframe');
+      video.addEventListener('contextmenu', event => {
+        event.preventDefault();
+      });
+      
+      // Disable link hover preview for video
+      const links = document.getElementsByTagName('a');
+      for (let i = 0; i < links.length; i++) {
+        links[i].addEventListener('mouseover', event => {
+          if (event.target.href === video.src) {
+            event.preventDefault();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
